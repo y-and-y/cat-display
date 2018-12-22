@@ -1,4 +1,4 @@
-package y_and_y.com.cat_display
+package com.y_and_y.cat_display
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("y_and_y.com.cat_display", appContext.packageName)
+        assertEquals("com.y_and_y.cat_display", appContext.packageName)
     }
 }

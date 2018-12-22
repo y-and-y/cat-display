@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="y_and_y.com.cat_display">
+          package="com.y_and_y.cat_display">
 
     <application
             android:allowBackup="true"

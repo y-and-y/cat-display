@@ -1,4 +1,4 @@
-package y_and_y.com.cat_display
+package com.y_and_y.cat_display
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
