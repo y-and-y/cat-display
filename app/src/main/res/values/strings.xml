@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">sample-android-app-overlay</string>
+    <string name="cat">cat</string>
 </resources>

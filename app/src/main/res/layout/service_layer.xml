@@ -13,7 +13,7 @@
         android:id="@+id/image_view"
         android:scaleType="fitCenter"
         android:background="#000"
-        android:layout_width="600dp"
-        android:layout_height="400dp"
-        android:contentDescription="train"/>
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        android:contentDescription="@string/cat"/>
 </RelativeLayout>

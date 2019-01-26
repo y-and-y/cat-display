@@ -58,7 +58,7 @@ class FloatingAppService : Service() {
     private fun startOverlay() {
         ImageView(this).run {
             val windowManager = getSystemService(Service.WINDOW_SERVICE) as WindowManager
-            Glide.with(this).load(R.raw.lrt).into(this)
+            Glide.with(this).load(R.raw.cat).into(this)
             button = FloatingButton(windowManager, this).apply {
                 visible = true
             }
