@@ -4,4 +4,10 @@
     <string name="cat_type">猫の種類</string>
     <string name="on_off">on/off</string>
     <string name="special_thanks">Special Thanks</string>
+    <string-array name="cat_type_array">
+        <item>三毛猫</item>
+        <item>黒猫</item>
+    </string-array>
+    <string name="cat_type_select">猫の種類を選択</string>
+    <string name="cat_key">cat_key</string>
 </resources>

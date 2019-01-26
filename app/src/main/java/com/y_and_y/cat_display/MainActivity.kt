@@ -2,11 +2,12 @@ package com.y_and_y.cat_display
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MotionEvent
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.qualifiedName
         private const val REQUEST_OVERLAY_PERMISSION = 1
+        // 保存された設定を読み込み、ない場合は0
         var catType = 0
     }
 
@@ -27,19 +29,37 @@ class MainActivity : AppCompatActivity() {
         //onOff Switch
 
         //cat type select
+        //設定をインポート
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        catType = sharedPreferences.getInt(getString(R.string.cat_key), 0)
+        //選択内容を「現在の猫種」に表示
+        nowCatTypeEdit()
+
         catTypeSelect.setOnClickListener {
-            val items = arrayOf("三毛猫", "黒猫")
+            val items = resources.getStringArray(R.array.cat_type_array)
+
             AlertDialog.Builder(this)
-                    .setTitle("猫の種類を選択")
+                    .setTitle(getString(R.string.cat_type_select))
                     .setItems(items) { dialog, witch ->
-                        catTypeSelect(witch)
+                        catTypeSelect(witch, sharedPreferences)
                     }
                     .show()
         }
     }
 
-    private fun catTypeSelect(witch: Int) {
+    private fun catTypeSelect(witch: Int, sharedPreferences: SharedPreferences) {
         catType = witch
+        //選択内容を保存
+        sharedPreferences.edit().apply {
+            putInt(getString(R.string.cat_key), catType)
+            apply()
+        }
+        //選択内容を「現在の猫種」に表示
+        nowCatTypeEdit()
+    }
+
+    private fun nowCatTypeEdit() {
+        nowCatType.text = resources.getStringArray(R.array.cat_type_array)[catType]
     }
 
     override fun onStart() {
