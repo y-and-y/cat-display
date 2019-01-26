@@ -1,16 +1,21 @@
 package com.y_and_y.cat_display
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MainActivity::class.qualifiedName
         private const val REQUEST_OVERLAY_PERMISSION = 1
+        var catType = 0
     }
 
     private var enabled = true
@@ -18,6 +23,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //onOff Switch
+
+        //cat type select
+        catTypeSelect.setOnClickListener {
+            val items = arrayOf("三毛猫", "黒猫")
+            AlertDialog.Builder(this)
+                    .setTitle("猫の種類を選択")
+                    .setItems(items) { dialog, witch ->
+                        catTypeSelect(witch)
+                    }
+                    .show()
+        }
+    }
+
+    private fun catTypeSelect(witch: Int) {
+        catType = witch
     }
 
     override fun onStart() {

@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -31,11 +30,11 @@ class FloatingAppService : Service() {
         val activityIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
         val notification = Notification.Builder(this)
-            .setContentIntent(pendingIntent)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(FloatingAppService::class.simpleName)
-            .setContentText("Service is running.")
-            .build()
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(FloatingAppService::class.simpleName)
+                .setContentText("Service is running.")
+                .build()
         startForeground(notificationId, notification)
     }
 
@@ -58,7 +57,12 @@ class FloatingAppService : Service() {
     private fun startOverlay() {
         ImageView(this).run {
             val windowManager = getSystemService(Service.WINDOW_SERVICE) as WindowManager
-            Glide.with(this).load(R.raw.cat).into(this)
+            Glide.with(this).load(when {
+                MainActivity.catType == 0 -> R.raw.gray_cat
+                MainActivity.catType == 1 -> R.raw.cat
+                else -> R.raw.cat
+            }
+            ).into(this)
             button = FloatingButton(windowManager, this).apply {
                 visible = true
             }
