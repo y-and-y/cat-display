@@ -55,8 +55,11 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/separate_line"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/dotted_line"
             app:layout_constraintTop_toBottomOf="@id/catType" />
@@ -66,16 +69,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/catType">
+            app:layout_constraintTop_toBottomOf="@id/separate_line">
 
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Special Thanks"
+                android:layout_marginTop="8dp"
+                android:text="@string/special_thanks"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             <TextView
