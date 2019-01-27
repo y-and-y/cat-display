@@ -10,4 +10,5 @@
     </string-array>
     <string name="cat_type_select">猫の種類を選択</string>
     <string name="cat_key">cat_key</string>
+    <string name="service_key">service_key</string>
 </resources>

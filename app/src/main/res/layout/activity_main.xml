@@ -49,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="現在の猫種"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="現在の猫種" />
         </LinearLayout>

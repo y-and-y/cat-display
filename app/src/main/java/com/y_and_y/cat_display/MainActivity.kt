@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.qualifiedName
         private const val REQUEST_OVERLAY_PERMISSION = 1
-        // 保存された設定を読み込み、ない場合は0
+        // 保存された猫種を読み込み、ない場合は三毛猫
         var catType = 0
     }
 
@@ -26,11 +26,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
         //onOff Switch
+        //設定をインポート
+        onOff.isChecked = sharedPreferences.getBoolean(getString(R.string.service_key), true)
+
+        onOff.setOnCheckedChangeListener { buttonView, isChecked ->
+            //設定を保存
+            sharedPreferences.edit().apply {
+                putBoolean(getString(R.string.service_key), isChecked)
+                apply()
+            }
+        }
 
         //cat type select
         //設定をインポート
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         catType = sharedPreferences.getInt(getString(R.string.cat_key), 0)
         //選択内容を「現在の猫種」に表示
         nowCatTypeEdit()
@@ -79,6 +90,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, FloatingAppService::class.java)
                     .setAction(FloatingAppService.ACTION_START)
             startService(intent)
+        }
+
+        //offの時にサービスを停止する
+        if (!onOff.isChecked) {
+            stopService(Intent(application, FloatingAppService::class.java))
         }
     }
 
