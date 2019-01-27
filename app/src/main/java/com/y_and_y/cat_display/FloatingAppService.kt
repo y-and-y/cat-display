@@ -57,10 +57,10 @@ class FloatingAppService : Service() {
     private fun startOverlay() {
         ImageView(this).run {
             val windowManager = getSystemService(Service.WINDOW_SERVICE) as WindowManager
-            Glide.with(this).load(when {
-                MainActivity.catType == 0 -> R.raw.gray_cat
-                MainActivity.catType == 1 -> R.raw.cat
-                else -> R.raw.cat
+            Glide.with(this).load(when (MainActivity.catType) {
+                0 -> R.raw.gray_cat
+                1 -> R.raw.cat
+                else -> R.raw.gray_cat
             }
             ).into(this)
             button = FloatingButton(windowManager, this).apply {
