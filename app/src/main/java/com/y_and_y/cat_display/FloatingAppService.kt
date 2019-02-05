@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import android.view.WindowManager
 import android.widget.ImageView
@@ -29,12 +30,22 @@ class FloatingAppService : Service() {
     private fun startNotification() {
         val activityIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
-        val notification = Notification.Builder(this)
+        val notification = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Notification.Builder(this,"CatDisplayChannelId")
+                    .setContentIntent(pendingIntent)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(FloatingAppService::class.simpleName)
+                    .setContentText("Service is running.")
+                    .build()
+        } else {
+            @Suppress("DEPRECATION")
+            Notification.Builder(this)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(FloatingAppService::class.simpleName)
                 .setContentText("Service is running.")
                 .build()
+        }
         startForeground(notificationId, notification)
     }
 
