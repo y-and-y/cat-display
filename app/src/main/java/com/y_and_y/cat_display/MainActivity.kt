@@ -3,6 +3,7 @@ package com.y_and_y.cat_display
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
@@ -50,11 +51,11 @@ class MainActivity : AppCompatActivity() {
             val items = resources.getStringArray(R.array.cat_type_array)
 
             AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.cat_type_select))
-                    .setItems(items) { dialog, witch ->
-                        catTypeSelect(witch, sharedPreferences)
-                    }
-                    .show()
+                .setTitle(getString(R.string.cat_type_select))
+                .setItems(items) { dialog, witch ->
+                    catTypeSelect(witch, sharedPreferences)
+                }
+                .show()
         }
     }
 
@@ -77,8 +78,11 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         if (hasOverlayPermission()) {
             val intent = Intent(this, FloatingAppService::class.java)
-                    .setAction(FloatingAppService.ACTION_STOP)
-            startService(intent)
+                .setAction(FloatingAppService.ACTION_STOP)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                startForegroundService(intent)
+            else
+                startService(intent)
         } else {
             requestOverlayPermission(REQUEST_OVERLAY_PERMISSION)
         }
@@ -88,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         if (enabled && hasOverlayPermission()) {
             val intent = Intent(this, FloatingAppService::class.java)
-                    .setAction(FloatingAppService.ACTION_START)
+                .setAction(FloatingAppService.ACTION_START)
             startService(intent)
         }
 
